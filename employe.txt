@@ -1,0 +1,44 @@
+package database;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class g 
+{ 
+public static void main(String[] args) 
+{ 
+try { 
+Class.forName("com.mysql.cj.jdbc.Driver"); 
+Connection con = 
+DriverManager.getConnection("jdbc:mysql:///employee", "root", "root"); 
+Statement s = con.createStatement(); 
+s.execute("create table employee ( eid integer,ename varchar(20), city varchar(30),dept varchar(20) )"); 
+s.execute("insert into employee values(1101,'Ram','Delhi','Accounts')"); 
+s.execute("insert into employee values(1102,'Shyam','Gurgaon','Sales')"); 
+s.execute("insert into employee values(1103,'Sam','Agra','Stocks')"); 
+s.execute("insert into employee values(1104,'Gita','Goa','HR')");
+s.execute("insert into employee values(1105,'Sita','Bangalore','Techsupport')");
+ResultSet rs = s.executeQuery("select * from employee"); 
+if (rs != null) 
+while (rs.next()) 
+{ 
+System.out.println("__________________________________"); 
+System.out.println("EId : " + rs.getString(1)); 
+System.out.println("EName : " + rs.getString(2)); 
+System.out.println("City: " + rs.getString(3));
+System.out.println("Dept: " + rs.getString(4));
+System.out.println("__________________________________"); 
+} 
+s.close();
+con.close(); 
+} catch (SQLException err) { 
+System.out.println("ERROR: " + err); 
+} catch (Exception err) { 
+System.out.println("ERROR: " + err); 
+} 
+ } 
+}
+ ***********************************

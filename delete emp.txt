@@ -1,0 +1,40 @@
+package database;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class update 
+{ 
+public static void main(String[] args) 
+{ 
+try { 
+Class.forName("com.mysql.cj.jdbc.Driver"); 
+Connection con = 
+DriverManager.getConnection("jdbc:mysql:///employee", "root", "root"); 
+Statement s = con.createStatement(); 
+s.execute("update employee Set city='hubli' where eid=1101");
+s.execute("delete from employee where eid=1105");
+
+ResultSet rs = s.executeQuery("select * from employee"); 
+if (rs != null) 
+while (rs.next()) 
+{ 
+System.out.println("__________________________________"); 
+System.out.println("EId : " + rs.getString(1)); 
+System.out.println("EName : " + rs.getString(2)); 
+System.out.println("City: " + rs.getString(3));
+System.out.println("Dept: " + rs.getString(4));
+System.out.println("__________________________________"); 
+} 
+s.close();
+con.close(); 
+} catch (SQLException err) { 
+System.out.println("ERROR: " + err); 
+} catch (Exception err) { 
+System.out.println("ERROR: " + err); 
+} 
+ } 
+} 
