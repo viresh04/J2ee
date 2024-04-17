@@ -1,0 +1,39 @@
+package exam;
+
+import java.sql.*;
+public class pgm1 {
+      public static void main(String[] args)  {
+      // Open a connection
+	    String DB_URL ="jdbc:mysql://localhost:3306/error";
+	   String USER ="root";
+	   String PASS ="root";
+	   try{
+      Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+         Statement stmt = conn.createStatement();
+    	//create query	  
+        // stmt.execute("create table vehicle2(Veh_Num varchar(50),veh_Name varchar(50),Owner_Name varchar(50),Per_dt date)");
+//insert query
+ //String sql="insert into vehicle2 values('KA 22 MC 1234','Kia Carens','Raj','2022-10-01'), ('KA 49 MC 1234','Kia sonet','Priya','2022-11-01')";
+       //update            
+         String sql="update vehicle2 set Owner_Name='priya' where Veh_Num='KA 22 MC 1234' ";
+                //view
+                 String sql1="select * from vehicle2";
+                 ResultSet res=stmt.executeQuery(sql1);
+                 while(res.next())
+                 {
+                	 System.out.println("Vehicle Num"+" "+res.getString("Veh_Num"));
+                	 System.out.println("Vehicle Name"+" "+res.getString("veh_Name"));
+                	 System.out.println("Owner Name"+" "+res.getString("Owner_Name"));
+                	 System.out.println("per_date"+" "+res.getString("Per_dt"));
+                	 System.out.println("----------------------");
+                 }
+         //int row=stmt.executeUpdate(sql1);
+	//System.out.println(row+"rows inserted");
+        
+         conn.close();
+         stmt.close();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } 
+   }
+}

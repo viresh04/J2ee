@@ -1,0 +1,643 @@
+1. Demonstrate a Java program to show mouse-handling events.
+public class MouseListenerExample extends Frame implements MouseListener
+{
+Label l;
+MouseListenerExample()
+{
+addMouseListener(this);
+l=new Label();
+l.setBounds(20,50,100,20);
+add(l);
+setSize(300,300);
+setLayout(null);
+setVisible(true);
+}
+public void mouseClicked(MouseEvent e)
+{
+l.setText("Mouse Clicked");
+}
+public void mouseEntered(MouseEvent e)
+{
+l.setText("Mouse Entered");
+}
+public void mouseExited(MouseEvent e)
+{
+l.setText("Mouse Exited");
+}
+public void mousePressed(MouseEvent e)
+{
+l.setText("Mouse Pressed");
+}
+public void mouseReleased(MouseEvent e)
+{
+l.setText("Mouse Released");
+}
+public static void main(String[] args)
+{
+new MouseListenerExample();
+}
+}
+
+
+
+2. Demonstrate a Java program to show key handling events.
+public class KeyListenerExample extends JFrame implements KeyListener
+{
+JLabel l;
+JTextArea area;
+KeyListenerExample()
+{
+l = new JLabel();
+l.setBounds (20, 50, 100, 20);
+area = new JTextArea();
+area.setBounds (20, 80, 300, 300);
+area.addKeyListener(this);
+add(l);
+add(area);
+setSize (400, 400);
+setLayout (null);
+setVisible (true);
+}
+public void keyPressed (KeyEvent e)
+{
+l.setText ("Key Pressed");
+}
+public void keyReleased (KeyEvent e)
+{
+l.setText ("Key Released");
+}
+public void keyTyped (KeyEvent e)
+{
+l.setText ("Key Typed");
+}
+public static void main(String[] args)
+{
+new KeyListenerExample();
+}
+}
+
+
+
+
+3. Implement a Java swings program to generate electricity bills by reading consumer
+name, number, number of units consumed. Consider the following conditions
+1-100 units 0.50/unit
+101-200 1.25/unit
+import java.awt.event.*;
+import javax.swing.*;
+public class SBill implements ActionListener
+{
+JFrame frm=new JFrame("Electricity Bill");
+JLabel name, Billno, units;
+JTextField BNo, cname, Unit;
+JButton btnBill;
+JTextArea print;
+SBill()
+{
+name=new JLabel("Name");
+name.setBounds(10,10,80,20);
+Billno=new JLabel("Bill No");
+Billno.setBounds(10,50,80,20);
+units=new JLabel("No.of Units Consumed");
+units.setBounds(10,70,220,50);
+cname=new JTextField();
+cname.setBounds(120,10,180,20);
+BNo=new JTextField();
+BNo.setBounds(120,50,120,20);
+Unit=new JTextField();
+Unit.setBounds(140,80,50,30);
+btnBill=new JButton("Generate");
+btnBill.setBounds(150,150,150,30);
+print=new JTextArea();
+print.setBounds(320,10,200,200);
+btnBill.addActionListener(this);
+frm.add(name);
+frm.add(Billno);
+frm.add(units);
+frm.add(cname);
+frm.add(BNo);
+frm.add(Unit);
+frm.add(btnBill);
+frm.add(print);
+frm.setLayout(null);
+frm.setSize(600,600);
+frm.setVisible(true);
+}
+public void actionPerformed(ActionEvent ae)
+{
+printBill();
+}
+public void printBill()
+{
+double total=Double.parseDouble(Unit.getText());
+if(total<=200)
+{
+if(total<=100 && total>=1)
+{
+total=total+total*0.50;
+}
+else if(total<=200 && total>=101)
+{
+total=total+total*1.25;
+}
+print.setText(print.getText()+" Electricity Bill Receipt"+"\n");
+print.setText(print.getText()+" -----------****-------------"+"\n");
+print.setText(print.getText()+"\n");
+print.setText(print.getText()+"Consumer Name: "+cname.getText()+"\n");
+print.setText(print.getText()+"Bill No: "+BNo.getText()+"\n");
+print.setText(print.getText()+"No. of Units: "+Unit.getText()+"\n");
+print.setText(print.getText()+"Total Amount: "+String.format("%.2f",total)+" Only");
+}
+else
+print.setText("Check the Input Values\n\n");
+}
+public static void main(String[] args)
+{
+new SBill();
+}
+}
+
+
+
+
+4. Java program to design a simple calculator using JButton class.
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
+class Calc extends JFrame implements ActionListener {
+static JFrame f;
+static JTextField l;
+String s0, s1, s2;
+Calc()
+{
+s0 = s1 = s2 = "";
+}
+public static void main(String args[])
+{
+f = new JFrame("Calc");
+Calc c = new Calc();
+l = new JTextField(16);
+l.setEditable(false);
+JButton b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, ba, bs, bd, bm, beq, beq1;
+b0 = new JButton("0");
+b1 = new JButton("1");
+b2 = new JButton("2");
+b3 = new JButton("3");
+b4 = new JButton("4");
+b5 = new JButton("5");
+b6 = new JButton("6");
+b7 = new JButton("7");
+b8 = new JButton("8");
+b9 = new JButton("9");
+beq1 = new JButton("=");
+ba = new JButton("+");
+bs = new JButton("-");
+bd = new JButton("/");
+bm = new JButton("*");
+beq = new JButton("C");
+JPanel p = new JPanel();
+bm.addActionListener(c);
+bd.addActionListener(c);
+bs.addActionListener(c);
+ba.addActionListener(c);
+b9.addActionListener(c);
+b8.addActionListener(c);
+b7.addActionListener(c);
+b6.addActionListener(c);
+b5.addActionListener(c);
+b4.addActionListener(c);
+b3.addActionListener(c);
+b2.addActionListener(c);
+b1.addActionListener(c);
+b0.addActionListener(c);
+beq.addActionListener(c);
+beq1.addActionListener(c);
+p.add(l);
+p.add(ba);
+p.add(b1);
+p.add(b2);
+p.add(b3);
+p.add(bs);
+p.add(b4);
+p.add(b5);
+p.add(b6);
+p.add(bm);
+p.add(b7);
+p.add(b8);
+p.add(b9);
+p.add(bd);
+p.add(b0);
+p.add(beq);
+p.add(beq1);
+p.setBackground(Color.blue);
+f.add(p);
+f.setSize(200, 220);
+f.show();
+}
+public void actionPerformed(ActionEvent e)
+{
+String s = e.getActionCommand();
+if (s.charAt(0) >= '0' && s.charAt(0) <= '9') {
+if (!s1.equals(""))
+s2 = s2 + s;
+else
+s0 = s0 + s;
+l.setText(s0 + s1 + s2);
+}
+else if (s.charAt(0) == 'C') {
+s0 = s1 = s2 = "";
+l.setText(s0 + s1 + s2);
+}
+else if (s.charAt(0) == '=') {
+double te;
+if (s1.equals("+"))
+te = (Double.parseDouble(s0) + Double.parseDouble(s2));
+else if (s1.equals("-"))
+te = (Double.parseDouble(s0) - Double.parseDouble(s2));
+else if (s1.equals("/"))
+te = (Double.parseDouble(s0) / Double.parseDouble(s2));
+else
+te = (Double.parseDouble(s0) * Double.parseDouble(s2));
+l.setText(s0 + s1 + s2 + "=" + te);
+s0 = Double.toString(te);
+s1 = s2 = "";
+}
+else {
+if (s1.equals("") || s2.equals(""))
+s1 = s;
+else {
+double te;
+if (s1.equals("+"))
+te = (Double.parseDouble(s0) + Double.parseDouble(s2));
+else if (s1.equals("-"))
+te = (Double.parseDouble(s0) - Double.parseDouble(s2));
+else if (s1.equals("/"))
+te = (Double.parseDouble(s0) / Double.parseDouble(s2));
+else
+te = (Double.parseDouble(s0) * Double.parseDouble(s2));
+s0 = Double.toString(te);
+s1 = s;
+s2 = "";
+}
+l.setText(s0 + s1 + s2);
+}
+}
+}
+5. Write a Program to create a menu with several menu items.
+import java.awt.*;
+import javax.swing.*;
+public class LabPrg3
+{
+JMenu menu, submenu,menu1;
+JMenuItem i1, i2, i3, i4, i5;
+LabPrg3()
+{
+JFrame f= new JFrame("Menu and MenuItem Example");
+JMenuBar mb=new JMenuBar();
+menu=new JMenu("Menu");
+menu1=new JMenu("Menu");
+submenu=new JMenu("Sub Menu");
+i1=new JMenuItem("Item 1");
+i2=new JMenuItem("Item 2");
+i3=new JMenuItem("Item 3");
+i4=new JMenuItem("Item 4");
+i5=new JMenuItem("Item 5");
+menu.add(i1); menu.add(i2); menu.add(i3);
+submenu.add(i4); submenu.add(i5);
+menu.add(submenu);
+mb.add(menu);
+mb.add(menu1);
+f.setJMenuBar(mb);
+f.setSize(400,400);
+f.setLayout(null);
+f.setVisible(true);
+}
+public static void main(String[] args) {
+new LabPrg3();
+}
+}
+
+
+
+6. Implement a program to show the functioning of a toggle button.
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.*;
+public class LabPrg3 implements ItemListener
+{
+JToggleButton jt;
+LabPrg3()
+{
+JFrame f= new JFrame("Menu and MenuItem Example");
+jt=new JToggleButton("OFF");
+f.setSize(400,400);
+jt.setBounds(100,100,100,50);
+f.add(jt);
+f.setLayout(null);
+f.setVisible(true);
+jt.addItemListener(this);
+}
+public void itemStateChanged(ItemEvent e) {
+if(jt.isSelected())
+{
+jt.setText("ON");
+}
+else
+{
+jt.setText("OFF");
+}
+}
+public static void main(String[] args) {
+new LabPrg3();
+}
+
+
+
+
+7. Write a Program to demonstrate Tabbed Panes with min 3 tabs
+import javax.swing.*;
+public class TabbedPaneExample
+{
+JFrame f;
+TabbedPaneExample(){
+f=new JFrame();
+JTextArea ta1=new JTextArea("this is main tab",10,10);
+JTextArea ta2=new JTextArea("this is visit tab",10,10);
+JTextArea ta3=new JTextArea("this is help tab",10,10);
+//ta.setBounds(60, 60, 200, 200);
+//ta.append("this is main tab");
+JPanel p1=new JPanel();
+JPanel p2=new JPanel();
+JPanel p3=new JPanel();
+p1.add(ta1);
+p2.add(ta2);
+p3.add(ta3);
+JTabbedPane tp=new JTabbedPane();
+tp.setBounds(50,50,200,200)
+tp.add("main",p1);
+tp.add("visit",p2);
+tp.add("help",p3);
+f.add(tp);
+f.setSize(400,400);
+f.setLayout(null);
+f.setVisible(true);
+}
+public static void main(String[] args) {
+new TabbedPaneExample();
+}
+}
+
+
+
+
+
+
+
+Program:- Checkbox and Radio Button program
+//import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+//import java.awt.event.ItemEvent;
+//import java.awt.event.ItemListener;
+import javax.swing.*;
+public class CheckboxDemo implements ActionListener {
+JFrame jf;
+JCheckBox ch1,ch2,ch3,ch4;
+//Checkbox ch5,ch6;
+JRadioButton r1,r2;
+ButtonGroup bgrp;
+JLabel jl1,jl2;
+//CheckboxGroup chgp;
+JTextArea jt;
+JButton jb;
+String data1="";
+CheckboxDemo()
+{
+jf=new JFrame("Checkbox Example");
+jf.setSize(400, 400);
+jl1=new JLabel("Select Programming Lang");
+jl1.setBounds(50, 20, 200, 40);
+ch1=new JCheckBox("Java");
+ch1.setBounds(50, 50, 80, 40);
+ch2=new JCheckBox("C++");
+ch2.setBounds(50, 80, 80, 40);
+ch3=new JCheckBox("Android");
+ch3.setBounds(50, 110, 80, 40);
+ch4=new JCheckBox("Python");
+ch4.setBounds(50, 140, 80, 40);
+jl2=new JLabel("Select Gender");
+jl2.setBounds(250, 20, 80, 40);
+r1=new JRadioButton("Male");
+r2=new JRadioButton("Female");
+r1.setBounds(250, 50, 80, 40);
+r2.setBounds(250, 80, 80, 40);
+bgrp=new ButtonGroup();
+bgrp.add(r1);
+bgrp.add(r2);
+/*chgp=new CheckboxGroup();
+//ch5=new Checkbox("Male",chgp,false);
+ch5.setBounds(250, 50, 80, 40);
+ch6=new Checkbox("Female",chgp,false);
+ch6.setBounds(250, 80, 80, 40);*/
+jb=new JButton("Check");
+jb.setBounds(140, 170, 80, 30);
+jt=new JTextArea(200,200);
+jt.setBounds(80, 210, 200, 150);
+jf.add(jl1);jf.add(jl2);
+jf.add(ch1);jf.add(ch2);
+jf.add(ch3);jf.add(ch4);
+jf.add(r1);jf.add(r2);
+jf.add(jb);jf.add(jt);
+jf.setLayout(null);
+jf.setVisible(true);
+/*ch5.addItemListener(new ItemListener() {
+public void itemStateChanged(ItemEvent e) {
+data1="Male"+"\n";
+}
+});
+ch6.addItemListener(new ItemListener() {
+public void itemStateChanged(ItemEvent e) {
+data1="Female"+"\n";
+}
+});*/
+jb.addActionListener(this);
+}
+//@Override
+public void actionPerformed(ActionEvent e)
+{
+String data="";
+if(ch1.isSelected())
+{data+="Java"+"\n";
+}
+if(ch2.isSelected())
+{
+data+="C++"+"\n";
+}
+if(ch3.isSelected())
+{
+data+="Android"+"\n";
+}
+if(ch4.isSelected())
+{
+data+="Python"+"\n";
+}
+if(r1.isSelected())
+{
+data1="Male"+"\n";
+}
+if(r2.isSelected())
+{
+data1="Female"+"\n";
+}jt.setText("Selected Programming Languages\n"+data
++"\n"+"Selected Gender\n"+data1);
+}
+public static void main(String[] args) {
+new CheckboxDemo();
+}
+}
+
+
+
+//10. Write a JDBC program to establish Database connection and create a vehicle table with columns –number, vehicle name, owner name and purchase date, and perform insert operation.
+
+Note: First Execute create query then comment it and execute insert query
+
+import java.sql.*;
+public class TestApplication {
+      public static void main(String[] args)  {
+      // Open a connection
+	    String DB_URL ="jdbc:mysql://localhost:3306/kle";
+	   String USER ="root";
+	   String PASS ="root";
+	   try{
+      Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+         Statement stmt = conn.createStatement();
+    	//create query	  
+         String sql="create table vehicle(Veh_Num varchar(50),veh_Name varchar(50),Owner_Name varchar(50),Per_dt date)";
+//insert query
+String sql="insert into vehicle values('KA 22 MC 1234','Kia Carens','Raj','2022-10-01'), ('KA 49 MC 1234','Kia sonet','Priya','2022-11-01')";
+         Int row=stmt.executeUpdate(sql);
+	System.out.println(row+”rows inserted”);
+        
+         conn.close();
+         stmt.close();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } 
+   }
+}
+
+
+
+
+//10. Write a JDBC program to establish Database connection and create a vehicle table with columns –number, vehicle name, owner name and purchase date, and perform insert operation.
+
+Note: First Execute create query then comment it and execute insert query
+
+import java.sql.*;
+public class TestApplication {
+      public static void main(String[] args)  {
+      // Open a connection
+	    String DB_URL ="jdbc:mysql://localhost:3306/kle";
+	   String USER ="root";
+	   String PASS ="root";
+	   try{
+      Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+         Statement stmt = conn.createStatement();
+    	//create query	  
+         String sql="create table vehicle(Veh_Num varchar(50),veh_Name varchar(50),Owner_Name varchar(50),Per_dt date)";
+//insert query
+String sql="insert into vehicle values('KA 22 MC 1234','Kia Carens','Raj','2022-10-01'), ('KA 49 MC 1234','Kia sonet','Priya','2022-11-01')";
+         Int row=stmt.executeUpdate(sql);
+	System.out.println(row+”rows inserted”);
+        
+         conn.close();
+         stmt.close();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } 
+   }
+}
+
+
+
+
+// 12. Write a JDBC program to establish Database connection and create an Employee table and perform insert operation.
+Note: First Execute create query then comment it and execute insert query
+
+import java.sql.*;
+public class TestApplication {
+      public static void main(String[] args)  {
+      // Open a connection
+	    String DB_URL ="jdbc:mysql://localhost:3306/kle";
+	   String USER ="root";
+	   String PASS ="root";
+	   try{
+      Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+         Statement stmt = conn.createStatement();
+    	//create query	  
+         String sql="create table Employee(Emp_id varchar(50),Emp_Name varchar(50),Salary integer)";
+//insert query
+String sql="insert into vehicle values(‘abc001’‘Raj’,10000), ('abc002’,’priya’,20000)";
+         Int row=stmt.executeUpdate(sql);
+	System.out.println(row+”rows inserted”);
+        
+         conn.close();
+         stmt.close();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } 
+   }
+}
+
+
+
+/13 Write a JDBC program to update, delete and view the Employee table data.
+Note: first execute update and view query then delete and view query
+
+import java.sql.*;
+public class TestApplication {
+      public static void main(String[] args)  {
+      // Open a connection
+	    String DB_URL ="jdbc:mysql://localhost:3306/kle";
+	   String USER ="root";
+	   String PASS ="root";
+	   try{
+		  
+      Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+         Statement stmt = conn.createStatement();
+//Update
+        String sql="update Employee set Salary =20000 where Emp_id ='abc001' ";
+        //view
+        String sql="select * from Employee ";
+         ResultSet res=stmt.executeQuery(sql);
+         while(res.next())
+         {
+System.out.println("----------------------");
+        	 System.out.println("Vehicle Num"+" "+res.getString("Emp_id"));
+        	 System.out.println("Vehicle Name"+" "+res.getString("Emp_Name"));
+        	 System.out.println("Owner Name"+" "+res.getString("Salary"));
+             	 System.out.println("----------------------");
+         }
+//delete
+        String sql="delete from Employee where Emp_id ='abc001' ";
+        //view
+        String sql="select * from Employee ";
+         ResultSet res=stmt.executeQuery(sql);
+         while(res.next())
+         {
+System.out.println("----------------------");
+        	 System.out.println("Vehicle Num"+" "+res.getString("Emp_id"));
+        	 System.out.println("Vehicle Name"+" "+res.getString("Emp_Name"));
+        	 System.out.println("Owner Name"+" "+res.getString("Salary"));
+             	 System.out.println("----------------------");
+         }
+
+        
+         conn.close();
+         stmt.close();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } 
+   }
+}
